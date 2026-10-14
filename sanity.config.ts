@@ -31,6 +31,7 @@ export default defineConfig({
           .title('Contenuti')
           .items([
             S.documentTypeListItem('corso').title('Corsi'),
+            S.documentTypeListItem('docente').title('Docenti'),
             S.divider(),
             singletonItem(S, 'homePage', 'Homepage'),
             singletonItem(S, 'aboutPage', 'About'),

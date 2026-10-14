@@ -1,6 +1,6 @@
 import { defineQuery } from 'next-sanity'
 
-const corsoCard = `_id, titolo, "slug": slug.current, descrizioneBreve, copertina, dataInizio, dataFine, prezzo, stato`
+const corsoCard = `_id, titolo, "slug": slug.current, descrizioneBreve, intro, copertina, dataInizio, dataFine, durata, orario, posti, prezzo, stato, cortiUrl`
 
 // $oggi = 'YYYY-MM-DD', passato da lib/date.ts
 export const NUOVI_CORSI_QUERY = defineQuery(
@@ -17,8 +17,12 @@ export const CORSO_QUERY = defineQuery(
 
 export const CORSI_SLUGS_QUERY = defineQuery(`*[_type == "corso" && defined(slug.current)].slug.current`)
 
-export const HOME_QUERY = defineQuery(`*[_type == "homePage"][0]{ heroTitolo, heroSottotitolo, descrizioneTitolo, descrizione }`)
+export const DOCENTI_QUERY = defineQuery(`*[_type == "docente"] | order(ordine asc) { _id, nome, ruolo, ritratto }`)
 
-export const ABOUT_QUERY = defineQuery(`*[_type == "aboutPage"][0]{ titolo, contenuto, immagine }`)
+export const HOME_QUERY = defineQuery(`*[_type == "homePage"][0]{ heroDefinizione, descrizione }`)
 
-export const SETTINGS_QUERY = defineQuery(`*[_type == "siteSettings"][0]{ nomeScuola, ragioneSociale, partitaIva, indirizzo, email, telefono, social }`)
+export const ABOUT_QUERY = defineQuery(`*[_type == "aboutPage"][0]{ immagine, storia, metodo }`)
+
+export const SETTINGS_QUERY = defineQuery(
+  `*[_type == "siteSettings"][0]{ nomeScuola, tagline, notaStagione, ragioneSociale, partitaIva, indirizzo, email, telefono, social }`
+)

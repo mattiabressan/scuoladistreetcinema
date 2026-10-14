@@ -6,13 +6,12 @@ import type { SiteSettings } from '@/lib/types'
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const settings = await sanityFetch<SiteSettings>(SETTINGS_QUERY, {}, {})
-  const nomeScuola = settings.nomeScuola ?? 'Scuola di Cinema'
 
   return (
-    <>
-      <Header nomeScuola={nomeScuola} />
+    <div className="site">
+      <Header />
       <main>{children}</main>
-      <Footer settings={{ ...settings, nomeScuola }} />
-    </>
+      <Footer settings={settings} />
+    </div>
   )
 }

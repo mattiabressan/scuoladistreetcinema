@@ -1,16 +1,23 @@
 import type { PortableTextBlock } from 'next-sanity'
 import type { SanityImageSource } from '@sanity/image-url'
 
+export type SanityImage = SanityImageSource & { alt?: string }
+
 export interface CorsoCard {
   _id: string
   titolo: string
   slug: string
   descrizioneBreve?: string
-  copertina?: SanityImageSource & { alt?: string }
+  intro?: string
+  copertina?: SanityImage
   dataInizio: string
   dataFine: string
+  durata?: string
+  orario?: string
+  posti?: number
   prezzo?: number
   stato?: 'aperto' | 'completo'
+  cortiUrl?: string
 }
 
 export interface Corso extends CorsoCard {
@@ -18,21 +25,28 @@ export interface Corso extends CorsoCard {
   docenti?: string[]
 }
 
+export interface Docente {
+  _id: string
+  nome: string
+  ruolo?: string
+  ritratto?: SanityImage
+}
+
 export interface HomePage {
-  heroTitolo?: string
-  heroSottotitolo?: string
-  descrizioneTitolo?: string
+  heroDefinizione?: string
   descrizione?: PortableTextBlock[]
 }
 
 export interface AboutPage {
-  titolo?: string
-  immagine?: SanityImageSource
-  contenuto?: PortableTextBlock[]
+  immagine?: SanityImage
+  storia?: string
+  metodo?: string
 }
 
 export interface SiteSettings {
   nomeScuola?: string
+  tagline?: string
+  notaStagione?: string
   ragioneSociale?: string
   partitaIva?: string
   indirizzo?: string
