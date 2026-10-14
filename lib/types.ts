@@ -10,14 +10,16 @@ export interface CorsoCard {
   descrizioneBreve?: string
   intro?: string
   copertina?: SanityImage
-  dataInizio: string
-  dataFine: string
+  dataInizio?: string
+  dataFine?: string
+  anno?: number
   durata?: string
   orario?: string
   posti?: number
   prezzo?: number
   stato?: 'aperto' | 'completo'
   cortiUrl?: string
+  iscrizioneUrl?: string
 }
 
 export interface Corso extends CorsoCard {
@@ -30,6 +32,7 @@ export interface Docente {
   nome: string
   ruolo?: string
   ritratto?: SanityImage
+  link?: string
 }
 
 export interface HomePage {

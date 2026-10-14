@@ -170,9 +170,11 @@ main { flex: 1; }
   padding-block: 60px 100px;
 }
 .hero__text, .hero__text h1 { display: flex; flex-direction: column; gap: 18px; }
-.ransom { display: flex; flex-wrap: wrap; gap: 6px; align-items: flex-end; font-size: clamp(56px, 7vw, 110px); }
+.hero__text { min-width: 0; container-type: inline-size; }
+/* Lettere dimensionate sulla colonna (cqi), non sulla finestra: la parola resta su una riga */
+.ransom { display: flex; flex-wrap: nowrap; gap: 6px; align-items: flex-end; font-size: clamp(32px, 14cqi, 110px); }
 .ransom .cut { line-height: 0.9; padding: 0.07em 0.12em; }
-.ransom--indent { padding-left: clamp(0px, 5vw, 80px); }
+.ransom--indent { padding-left: 8cqi; }
 .hero__cta { margin-top: 32px; padding-left: 12px; }
 
 .definition { display: flex; flex-direction: column; gap: 10px; max-width: 480px; padding: 36px 34px 44px; }

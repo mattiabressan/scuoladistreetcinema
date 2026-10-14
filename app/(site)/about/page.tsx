@@ -31,14 +31,14 @@ export default async function About() {
           <h2 className="panel__title">LA STORIA</h2>
           <p className="panel__text">
             {about.storia ??
-              'La scuola nasce da un gruppo di filmmaker indipendenti stanchi di sentirsi dire che per fare cinema servono soldi e permessi. Abbiamo iniziato girando nei cortili, poi abbiamo cominciato a insegnarlo.'}
+                            'La Scuola di Street Cinema, originale e unica, è stata fondata nel 2013 da Tekla Taidelli, la regista più underground in Italia, conosciuta per il film culto Fuori Vena (2004) e premio Siae per il talento creativo a Venezia 2025 con il nuovo film 6:06.'}
           </p>
         </TornPanel>
         <div className="panel panel--ink t-ink" style={rot(1)}>
           <h2 className="panel__title">IL METODO</h2>
           <p className="panel__text">
             {about.metodo ??
-              "Poca teoria, tanto girato. Ogni corso finisce con un corto vero, proiettato in pubblico. Si lavora in piccoli gruppi, con l'attrezzatura che ognuno ha già in tasca."}
+                            "Tutte e tutti i partecipanti, a turno, lavorano in ogni reparto: regia, fotografia, audio, edizione, direzione degli attori, back stage. Prima si va in strada a girare, poi si monta il film."}
           </p>
         </div>
       </section>

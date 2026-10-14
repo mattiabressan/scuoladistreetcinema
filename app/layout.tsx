@@ -13,7 +13,8 @@ const fonts = [archivo, abril, gothic, anton, elite, courier].map((f) => f.varia
 
 export const metadata: Metadata = {
   title: { default: 'Scuola di Street Cinema', template: '%s — Street Cinema' },
-  description: 'Scuola di cinema indipendente. Corsi brevi e pratici per girare film con quello che hai.',
+  description:
+    'Scuola di Street Cinema di Tekla Taidelli: cinema di strada per dare voce agli invisibili, con attrici e attori presi dalla strada e testi di grandi autori.',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

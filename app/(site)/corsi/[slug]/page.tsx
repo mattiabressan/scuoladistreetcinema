@@ -4,7 +4,7 @@ import { PortableText } from 'next-sanity'
 import CourseRow from '@/components/courses/CourseRow'
 import { sanityFetch } from '@/sanity/client'
 import { CORSO_QUERY, CORSI_SLUGS_QUERY, SETTINGS_QUERY } from '@/sanity/queries'
-import { oggi } from '@/lib/date'
+import { isPassato } from '@/lib/date'
 import type { Corso, SiteSettings } from '@/lib/types'
 
 type Props = { params: Promise<{ slug: string }> }
@@ -24,7 +24,7 @@ export default async function CorsoPage({ params }: Props) {
   ])
   if (!corso) notFound()
 
-  const passato = corso.dataFine < oggi()
+  const passato = isPassato(corso)
 
   return (
     <div className="container page">
@@ -32,10 +32,15 @@ export default async function CorsoPage({ params }: Props) {
         ← {passato ? 'CORSI PASSATI' : 'NUOVI CORSI'}
       </Link>
 
-      {/* Corso concluso: niente iscrizione (stato "completo" disabilita il box) */}
-      <CourseRow corso={passato ? { ...corso, stato: 'completo' } : corso} index={0} email={settings.email} detail>
-        {corso.descrizione ? <PortableText value={corso.descrizione} /> : <p>{corso.intro ?? corso.descrizioneBreve}</p>}
-        {!!corso.docenti?.length && <p><strong>Docenti:</strong> {corso.docenti.join(', ')}</p>}
+      <CourseRow corso={corso} index={0} email={settings.email} detail>
+        {corso.descrizione ? (
+          <PortableText value={corso.descrizione} />
+        ) : (
+          <>
+            <p>{corso.intro ?? corso.descrizioneBreve}</p>
+            {!!corso.docenti?.length && <p><strong>A cura di</strong> {corso.docenti.join(', ')}</p>}
+          </>
+        )}
       </CourseRow>
     </div>
   )

@@ -8,8 +8,8 @@ export default function Footer({ settings }: { settings: SiteSettings }) {
   return (
     <footer className="site-footer">
       <div className="footer-col">
-        <Cutout tone="pink" rotate={-2} className="footer-brand">Scuola di STREET CINEMA</Cutout>
-        <p className="footer-tagline">{tagline ?? 'Scuola di cinema indipendente.\nNessun permesso richiesto.'}</p>
+        <Cutout tone="pink" rotate={-2} className="footer-brand">STREET CINEMA</Cutout>
+        <p className="footer-tagline">{tagline ?? 'Dare voce agli invisibili.'}</p>
       </div>
 
       <div className="footer-col">

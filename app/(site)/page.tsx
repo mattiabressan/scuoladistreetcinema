@@ -28,7 +28,7 @@ const CINEMA: Letter[] = [
 ]
 
 const DEFINIZIONE =
-  "Fare film con quello che c'è: una camera, la luce del giorno, la gente sul marciapiede. Il contrario del set. Il contrario del permesso."
+  "Realizzare un corto con attrici e attori presi dalla strada e testi di letterati famosi, con un 'neorealismo underground'."
 
 export default async function Home() {
   const [home, corsi] = await Promise.all([
@@ -76,20 +76,25 @@ export default async function Home() {
 
       <section className="container manifesto-wrap">
         <TornPanel edge="b" tone="ink" rotate={-1} className="manifesto">
-          <p className="manifesto__words">
-            <Cutout tone="pink" rotate={-2}>GIRA.</Cutout>
-            <Cutout font="abril" rotate={1.5}>sbaglia.</Cutout>
-            <Cutout tone="pink" rotate={-1}>RIGIRA.</Cutout>
+           <p className="manifesto__words">
+            <Cutout tone="pink" rotate={-2}>DARE VOCE</Cutout>
+            <Cutout font="abril" rotate={1.5}>agli</Cutout>
+            <Cutout tone="pink" rotate={-1}>INVISIBILI.</Cutout>
           </p>
           <div className="manifesto__text">
             {home.descrizione ? (
               <PortableText value={home.descrizione} />
             ) : (
-              <p>
-                Niente teatri di posa, niente budget. La Scuola di Street Cinema insegna a girare film con quello che hai: luce
-                naturale, attori presi dalla strada, montaggio fatto in cucina. Corsi brevi, pratici, aperti a chiunque abbia qualcosa
-                da raccontare.
-              </p>
+              <>
+                <p>
+                  Fare cinema significa prima di tutto &lsquo;dare voce agli invisibili&rsquo;: attrici e attori reclutati dalla strada e
+                  testi di letterati famosi per affrontare temi di attualità.
+                </p>
+                <p>
+                  I corsi si rivolgono a tutte e tutti coloro che hanno il coraggio di mettersi in gioco, facendo &ldquo;cinema di
+                  strada&rdquo; e trasformando un cortometraggio in un&apos;esperienza emozionante e unica.
+                </p>
+              </>
             )}
             <Link href="/about" className="manifesto__link">Chi siamo →</Link>
           </div>

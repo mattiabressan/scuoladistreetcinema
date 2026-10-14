@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { ReactNode } from 'react'
 import Media from '../ui/Media'
 import EnrollBox from './EnrollBox'
-import { dal } from '@/lib/date'
+import { isPassato, quando } from '@/lib/date'
 import { pad2 } from '@/lib/style'
 import type { CorsoCard } from '@/lib/types'
 
@@ -16,8 +16,16 @@ interface Props {
 
 // Card orizzontale della pagina Nuovi corsi (e del dettaglio)
 export default function CourseRow({ corso, index, email, detail, children }: Props) {
-  const { titolo, slug, intro, descrizioneBreve, copertina, dataInizio, durata, orario, posti, prezzo } = corso
+  const { titolo, slug, intro, descrizioneBreve, copertina, durata, orario, posti, prezzo } = corso
   const Title = detail ? 'h1' : 'h2'
+  const passato = isPassato(corso)
+
+  // Corsi in programma: sempre tutte e tre le voci ("da definire"); conclusi: solo quelle note
+  const meta = ([
+    ['ORARIO', orario],
+    ['POSTI', posti],
+    ['QUOTA', prezzo != null ? `€ ${prezzo}` : undefined],
+  ] as const).filter(([, value]) => value != null || !passato)
 
   return (
     <article className={`card card--lg course-row t-paper${detail ? ' course-row--detail' : ''}`}>
@@ -27,22 +35,31 @@ export default function CourseRow({ corso, index, email, detail, children }: Pro
         <div className="course-row__top">
           <span className="badge">{pad2(index + 1)}</span>
           <span className="course-row__when">
-            {dal(dataInizio)}
+            {quando(corso)}
             {durata && ` · ${durata}`}
           </span>
         </div>
 
-        <Title className="label">{detail ? titolo : <Link href={`/corsi/${slug}`}>{titolo}</Link>}</Title>
+        <Title className="label">{detail ? titolo : <Link href={`/${passato ? 'corsi-passati' : 'corsi'}/${slug}`}>{titolo}</Link>}</Title>
 
         <div className="course-row__text">{children ?? <p>{intro ?? descrizioneBreve}</p>}</div>
 
-        <dl className="meta">
-          <div><dt>ORARIO</dt><dd>{orario ?? 'da definire'}</dd></div>
-          <div><dt>POSTI</dt><dd>{posti ?? 'da definire'}</dd></div>
-          <div><dt>QUOTA</dt><dd>{prezzo != null ? `€ ${prezzo}` : 'da definire'}</dd></div>
-        </dl>
+        {!!meta.length && (
+          <dl className="meta">
+            {meta.map(([label, value]) => (
+              <div key={label}><dt>{label}</dt><dd>{value ?? 'da definire'}</dd></div>
+            ))}
+          </dl>
+        )}
 
-        <EnrollBox corso={corso} email={email} />
+        {passato ? (
+          <div className="enroll">
+            <span className="enroll__note">Edizione conclusa.</span>
+            <Link href="/corsi" className="btn btn--pink">PROSSIMI CORSI →</Link>
+          </div>
+        ) : (
+          <EnrollBox corso={corso} email={email} />
+        )}
       </div>
     </article>
   )

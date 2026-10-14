@@ -2,13 +2,15 @@ import Cutout from '@/components/ui/Cutout'
 import PastCourseCard from '@/components/courses/PastCourseCard'
 import { sanityFetch } from '@/sanity/client'
 import { CORSI_PASSATI_QUERY } from '@/sanity/queries'
-import { oggi } from '@/lib/date'
+import { annoCorso, oggi } from '@/lib/date'
 import type { CorsoCard } from '@/lib/types'
 
 export const metadata = { title: 'Corsi passati' }
 
 export default async function CorsiPassati() {
-  const corsi = await sanityFetch<CorsoCard[]>(CORSI_PASSATI_QUERY, { oggi: oggi() }, [])
+  const corsi = (await sanityFetch<CorsoCard[]>(CORSI_PASSATI_QUERY, { oggi: oggi() }, [])).sort(
+    (a, b) => annoCorso(b).localeCompare(annoCorso(a)) || (b.dataInizio ?? '').localeCompare(a.dataInizio ?? '')
+  )
 
   return (
     <div className="container page page--past">
